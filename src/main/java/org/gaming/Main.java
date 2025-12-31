@@ -21,13 +21,13 @@ public class Main {
         resetButton.setBorder(BorderFactory.createCompoundBorder());
         resetButton.setContentAreaFilled(false);
 
-        MineSweeperButton [][] buttons = new MineSweeperButton[10][20];
+        MineSweeperButton [][] buttons = new MineSweeperButton[Constants.ROWS][Constants.COLS];
 
-        int totalButtons = 10 * 20;
-        int numberOfMines = totalButtons / 5; // 20% of the buttons are mines
+        int totalButtons = Constants.ROWS * Constants.COLS;
+        int numberOfMines = totalButtons / Constants.MINE_RATIO;
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < Constants.ROWS; i++) {
+            for (int j = 0; j < Constants.COLS; j++) {
                 double randomNumber = Math.random();
                 MineSweeperButton button;
                 if (randomNumber < ((double) numberOfMines / (double) totalButtons)) {
@@ -53,12 +53,12 @@ public class Main {
         directions.add(new Direction(1, 0));
         directions.add(new Direction(1, 1));
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < Constants.ROWS; i++) {
+            for (int j = 0; j < Constants.COLS; j++) {
                 for (Direction direction : directions) {
                     int newX = i + direction.getX();
                     int newY = j + direction.getY();
-                    if (newX >= 0 && newX < 10 && newY >= 0 && newY < 20) {
+                    if (newX >= 0 && newX < Constants.ROWS && newY >= 0 && newY < Constants.COLS) {
                         if (buttons[newX][newY].isMine()) {
                             buttons[i][j].setNumberOfSurroundingMines(buttons[i][j].getNumberOfSurroundingMines() + 1);
                         }
