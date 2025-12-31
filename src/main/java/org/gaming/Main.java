@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
+
     public static void main(String[] args) {
         JFrame jFrame = new JFrame("Minesweeper");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,11 +19,25 @@ public class Main {
         resetButton.setBorder(BorderFactory.createCompoundBorder());
         resetButton.setContentAreaFilled(false);
 
+        MineSweeperButton [][] buttons = new MineSweeperButton[10][20];
+
+        int totalButtons = 10 * 20;
+        int numberOfMines = totalButtons / 5; // 20% of the buttons are mines
+
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
-                JButton button = new JButton();
+                double randomNumber = Math.random();
+                MineSweeperButton button;
+                if (randomNumber < ((double) numberOfMines / (double) totalButtons)) {
+                    button = new MineSweeperButton(true);
+                    numberOfMines--;
+                } else {
+                    button = new MineSweeperButton(false);
+                }
                 button.setBounds(20 + j * 18, 60 + i * 18, 18, 18);
+                buttons[i][j] = button;
                 jFrame.add(button);
+                totalButtons--;
             }
         }
 
