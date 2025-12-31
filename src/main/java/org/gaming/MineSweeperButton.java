@@ -25,6 +25,7 @@ public class MineSweeperButton extends JButton {
         this.isMine = isMine;
         this.addActionListener(event -> {
             if (this.isMine) {
+                this.setText("*");
                 System.out.println("Game over");
             } else {
                 this.setEnabled(false);
