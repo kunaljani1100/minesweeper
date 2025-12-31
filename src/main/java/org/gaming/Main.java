@@ -6,22 +6,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame("Minesweeper");
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLayout(null);
-        jFrame.setSize(400, 400);
-
-        ImageIcon icon = new ImageIcon("smiley.png");
-        Image scaledImage = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-
-        JButton resetButton = new JButton(new ImageIcon(scaledImage));
-        resetButton.setBounds(200, 20, 30, 30);
-        resetButton.setBorder(BorderFactory.createCompoundBorder());
-        resetButton.setContentAreaFilled(false);
-
-        MineSweeperButton [][] buttons = new MineSweeperButton[Constants.ROWS][Constants.COLS];
-
+    private static void setNewGame(MineSweeperButton [][] buttons) {
         int totalButtons = Constants.ROWS * Constants.COLS;
         int numberOfMines = totalButtons / Constants.MINE_RATIO;
 
@@ -40,6 +25,24 @@ public class Main {
                 totalButtons--;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        JFrame jFrame = new JFrame("Minesweeper");
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(null);
+        jFrame.setSize(400, 400);
+
+        ImageIcon icon = new ImageIcon("smiley.png");
+        Image scaledImage = icon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+        JButton resetButton = new JButton(new ImageIcon(scaledImage));
+        resetButton.setBounds(200, 20, 30, 30);
+        resetButton.setBorder(BorderFactory.createCompoundBorder());
+        resetButton.setContentAreaFilled(false);
+
+        MineSweeperButton [][] buttons = new MineSweeperButton[Constants.ROWS][Constants.COLS];
+        setNewGame(buttons);
 
         for (int i = 0; i < Constants.ROWS; i++) {
             for (int j = 0; j < Constants.COLS; j++) {
