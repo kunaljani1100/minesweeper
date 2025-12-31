@@ -40,6 +40,10 @@ public class Main {
             }
         }
 
+        resetButton.addActionListener(event -> {
+            jFrame.dispose();
+            Main.main(null);
+        });
         jFrame.add(resetButton);
         jFrame.setVisible(true);
     }
