@@ -2,6 +2,7 @@ package org.gaming;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -36,22 +37,25 @@ public class Main {
                 }
                 button.setBounds(20 + j * 18, 60 + i * 18, 18, 18);
                 buttons[i][j] = button;
-                jFrame.add(button);
                 totalButtons--;
             }
         }
 
         for (int i = 0; i < Constants.ROWS; i++) {
             for (int j = 0; j < Constants.COLS; j++) {
+                buttons[i][j].setNeighbors(new ArrayList<>());
                 for (Direction direction : Constants.ADJACENT_OFFSETS) {
                     int newX = i + direction.getX();
                     int newY = j + direction.getY();
                     if (newX >= 0 && newX < Constants.ROWS && newY >= 0 && newY < Constants.COLS) {
+                        buttons[i][j].getNeighbors().add(buttons[newX][newY]);
                         if (buttons[newX][newY].isMine()) {
                             buttons[i][j].setNumberOfSurroundingMines(buttons[i][j].getNumberOfSurroundingMines() + 1);
                         }
                     }
+                    System.out.println(buttons[i][j].getNeighbors().size());
                 }
+                jFrame.add(buttons[i][j]);
             }
         }
 

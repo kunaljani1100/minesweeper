@@ -1,6 +1,7 @@
 package org.gaming;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * This class defines a minesweeper button that holds information about whether it is a mine or not.
@@ -18,6 +19,11 @@ public class MineSweeperButton extends JButton {
     private int numberOfSurroundingMines;
 
     /**
+     * The list of neighboring MineSweeperButtons
+     */
+    private List<MineSweeperButton> neighbors;
+
+    /**
      * Constructor to initialize the MineSweeperButton with mine status and surrounding mine count.
      * @param isMine Whether this button is a mine or not.
      */
@@ -26,11 +32,16 @@ public class MineSweeperButton extends JButton {
         this.addActionListener(event -> {
             if (this.isMine) {
                 this.setText("*");
-                System.out.println("Game over");
             } else {
                 this.setEnabled(false);
                 this.setText(String.valueOf(this.numberOfSurroundingMines));
-                System.out.println("Safe button clicked");
+                if (this.numberOfSurroundingMines == 0) {
+                    for (MineSweeperButton neighbor : neighbors) {
+                        if (neighbor.isEnabled()) {
+                            neighbor.doClick();
+                        }
+                    }
+                }
             }
         });
     }
@@ -49,5 +60,13 @@ public class MineSweeperButton extends JButton {
 
     public void setNumberOfSurroundingMines(int numberOfSurroundingMines) {
         this.numberOfSurroundingMines = numberOfSurroundingMines;
+    }
+
+    public List<MineSweeperButton> getNeighbors() {
+        return neighbors;
+    }
+
+    public void setNeighbors(List<MineSweeperButton> neighbors) {
+        this.neighbors = neighbors;
     }
 }
