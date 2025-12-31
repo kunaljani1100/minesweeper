@@ -1,16 +1,10 @@
 package org.gaming;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
  * This class defines a minesweeper button that holds information about whether it is a mine or not.
  */
-@Getter
-@Setter
 public class MineSweeperButton extends JButton {
 
     /**
@@ -34,8 +28,25 @@ public class MineSweeperButton extends JButton {
                 System.out.println("Game over");
             } else {
                 this.setEnabled(false);
+                this.setText(String.valueOf(this.numberOfSurroundingMines));
                 System.out.println("Safe button clicked");
             }
         });
+    }
+
+    public boolean isMine() {
+        return isMine;
+    }
+
+    public void setMine(boolean mine) {
+        isMine = mine;
+    }
+
+    public int getNumberOfSurroundingMines() {
+        return numberOfSurroundingMines;
+    }
+
+    public void setNumberOfSurroundingMines(int numberOfSurroundingMines) {
+        this.numberOfSurroundingMines = numberOfSurroundingMines;
     }
 }

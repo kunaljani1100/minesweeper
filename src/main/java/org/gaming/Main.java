@@ -2,6 +2,8 @@ package org.gaming;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -38,6 +40,30 @@ public class Main {
                 buttons[i][j] = button;
                 jFrame.add(button);
                 totalButtons--;
+            }
+        }
+
+        List<Direction> directions = new ArrayList<>();
+        directions.add(new Direction(-1, -1));
+        directions.add(new Direction(-1, 0));
+        directions.add(new Direction(-1, 1));
+        directions.add(new Direction(0, -1));
+        directions.add(new Direction(0, 1));
+        directions.add(new Direction(1, -1));
+        directions.add(new Direction(1, 0));
+        directions.add(new Direction(1, 1));
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 20; j++) {
+                for (Direction direction : directions) {
+                    int newX = i + direction.getX();
+                    int newY = j + direction.getY();
+                    if (newX >= 0 && newX < 10 && newY >= 0 && newY < 20) {
+                        if (buttons[newX][newY].isMine()) {
+                            buttons[i][j].setNumberOfSurroundingMines(buttons[i][j].getNumberOfSurroundingMines() + 1);
+                        }
+                    }
+                }
             }
         }
 
