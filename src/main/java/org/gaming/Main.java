@@ -2,8 +2,6 @@ package org.gaming;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -43,19 +41,9 @@ public class Main {
             }
         }
 
-        List<Direction> directions = new ArrayList<>();
-        directions.add(new Direction(-1, -1));
-        directions.add(new Direction(-1, 0));
-        directions.add(new Direction(-1, 1));
-        directions.add(new Direction(0, -1));
-        directions.add(new Direction(0, 1));
-        directions.add(new Direction(1, -1));
-        directions.add(new Direction(1, 0));
-        directions.add(new Direction(1, 1));
-
         for (int i = 0; i < Constants.ROWS; i++) {
             for (int j = 0; j < Constants.COLS; j++) {
-                for (Direction direction : directions) {
+                for (Direction direction : Constants.ADJACENT_OFFSETS) {
                     int newX = i + direction.getX();
                     int newY = j + direction.getY();
                     if (newX >= 0 && newX < Constants.ROWS && newY >= 0 && newY < Constants.COLS) {
