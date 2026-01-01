@@ -38,6 +38,14 @@ public class MineSweeperButton extends JButton {
     public MineSweeperButton(boolean isMine) {
         this.isMine = isMine;
         this.isRevealed = false;
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e) && !isRevealed) {
+                    setText(getText().equals("F") ? "" : "F");
+                }
+            }
+        });
         this.addActionListener(event -> {
             if (this.isMine) {
                 this.setText("*");

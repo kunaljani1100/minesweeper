@@ -21,6 +21,7 @@ public class Main {
 
         MineSweeperButton [][] buttons = new MineSweeperButton[Constants.ROWS][Constants.COLS];
         TextField mineMonitor = new TextField();
+        mineMonitor.setEditable(false);
         mineMonitor.setBounds(30, 20, 100, 30);
         GameOperations.setNewGame(buttons, mineMonitor);
         GameOperations.setSurroundingMines(jFrame, buttons);
