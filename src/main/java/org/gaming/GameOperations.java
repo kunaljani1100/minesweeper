@@ -12,6 +12,7 @@ public class GameOperations {
     public static void setNewGame(MineSweeperButton [][] buttons) {
         int totalButtons = Constants.ROWS * Constants.COLS;
         int numberOfMines = totalButtons / Constants.MINE_RATIO;
+        Constants.TOTAL_MINES = numberOfMines;
 
         for (int i = 0; i < Constants.ROWS; i++) {
             for (int j = 0; j < Constants.COLS; j++) {
