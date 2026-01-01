@@ -39,20 +39,20 @@ public class MineSweeperButton extends JButton {
         this.isMine = isMine;
         this.isRevealed = false;
         this.addActionListener(event -> {
-            if (Constants.TOTAL_MINES == Constants.BOXES_LEFT) {
-                JOptionPane.showMessageDialog(this, "Congratulations! You've won the game!");
-                System.exit(0);
-            }
             if (this.isMine) {
                 this.setText("*");
                 GameOperations.checkNeighbors(this);
             } else {
+                Constants.BOXES_LEFT--;
+                if (Constants.TOTAL_MINES == Constants.BOXES_LEFT) {
+                    JOptionPane.showMessageDialog(this, "Congratulations! You've won the game!");
+                    System.exit(0);
+                }
                 this.setEnabled(false);
                 this.setText(String.valueOf(this.numberOfSurroundingMines));
                 if (this.numberOfSurroundingMines == 0) {
                     for (MineSweeperButton neighbor : neighbors) {
                         if (neighbor.isEnabled()) {
-                            Constants.BOXES_LEFT--;
                             neighbor.doClick();
                         }
                     }
