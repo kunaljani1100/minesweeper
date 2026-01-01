@@ -39,7 +39,7 @@ public class MineSweeperButton extends JButton {
         this.isMine = isMine;
         this.isRevealed = false;
         this.addActionListener(event -> {
-            if (Constants.TOTAL_MINES == 0) {
+            if (Constants.TOTAL_MINES == Constants.BOXES_LEFT) {
                 JOptionPane.showMessageDialog(this, "Congratulations! You've won the game!");
                 System.exit(0);
             }
