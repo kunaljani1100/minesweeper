@@ -53,4 +53,21 @@ public class GameOperations {
             }
         }
     }
+
+    /**
+     * Recursively check and reveal neighboring buttons when a mine is clicked.
+     * @param button The button that was clicked.
+     */
+    public static void checkNeighbors(MineSweeperButton button) {
+        button.setEnabled(false);
+        button.setRevealed(true);
+        if (button.isMine()) {
+            button.setText("*");
+        }
+        for (MineSweeperButton neighbor : button.getNeighbors()) {
+            if (!neighbor.isRevealed()) {
+                checkNeighbors(neighbor);
+            }
+        }
+    }
 }

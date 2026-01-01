@@ -24,14 +24,21 @@ public class MineSweeperButton extends JButton {
     private List<MineSweeperButton> neighbors;
 
     /**
+     * Check if the button has been revealed.
+     */
+    private boolean isRevealed;
+
+    /**
      * Constructor to initialize the MineSweeperButton with mine status and surrounding mine count.
      * @param isMine Whether this button is a mine or not.
      */
     public MineSweeperButton(boolean isMine) {
         this.isMine = isMine;
+        this.isRevealed = false;
         this.addActionListener(event -> {
             if (this.isMine) {
                 this.setText("*");
+                GameOperations.checkNeighbors(this);
             } else {
                 this.setEnabled(false);
                 this.setText(String.valueOf(this.numberOfSurroundingMines));
@@ -68,5 +75,13 @@ public class MineSweeperButton extends JButton {
 
     public void setNeighbors(List<MineSweeperButton> neighbors) {
         this.neighbors = neighbors;
+    }
+
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+
+    public void setRevealed(boolean revealed) {
+        isRevealed = revealed;
     }
 }
