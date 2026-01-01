@@ -1,6 +1,7 @@
 package org.gaming;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GameOperations {
@@ -9,16 +10,17 @@ public class GameOperations {
      * Set up a new game by initializing the buttons with mines and non-mines.
      * @param buttons The buttons that are available to the user.
      */
-    public static void setNewGame(MineSweeperButton [][] buttons) {
+    public static void setNewGame(MineSweeperButton [][] buttons, TextField mineMonitor) {
         int totalButtons = Constants.ROWS * Constants.COLS;
         int numberOfMines = totalButtons / Constants.MINE_RATIO;
-        Constants.TOTAL_MINES = numberOfMines;
+        Constants.TOTAL_MINES = 0;
 
         for (int i = 0; i < Constants.ROWS; i++) {
             for (int j = 0; j < Constants.COLS; j++) {
                 double randomNumber = Math.random();
                 MineSweeperButton button;
                 if (randomNumber < ((double) numberOfMines / (double) totalButtons)) {
+                    Constants.TOTAL_MINES++;
                     button = new MineSweeperButton(true);
                     numberOfMines--;
                 } else {
@@ -29,6 +31,7 @@ public class GameOperations {
                 totalButtons--;
             }
         }
+        mineMonitor.setText(Integer.toString(Constants.TOTAL_MINES));
     }
 
     /**

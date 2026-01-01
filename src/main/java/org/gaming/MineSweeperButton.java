@@ -1,6 +1,9 @@
 package org.gaming;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -36,7 +39,7 @@ public class MineSweeperButton extends JButton {
         this.isMine = isMine;
         this.isRevealed = false;
         this.addActionListener(event -> {
-            if (Constants.BOXES_LEFT == Constants.TOTAL_MINES) {
+            if (Constants.TOTAL_MINES == 0) {
                 JOptionPane.showMessageDialog(this, "Congratulations! You've won the game!");
                 System.exit(0);
             }

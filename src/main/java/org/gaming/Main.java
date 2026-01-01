@@ -20,13 +20,16 @@ public class Main {
         resetButton.setContentAreaFilled(false);
 
         MineSweeperButton [][] buttons = new MineSweeperButton[Constants.ROWS][Constants.COLS];
-        GameOperations.setNewGame(buttons);
+        TextField mineMonitor = new TextField();
+        mineMonitor.setBounds(30, 20, 100, 30);
+        GameOperations.setNewGame(buttons, mineMonitor);
         GameOperations.setSurroundingMines(jFrame, buttons);
 
         resetButton.addActionListener(event -> {
             jFrame.dispose();
             Main.main(null);
         });
+        jFrame.add(mineMonitor);
         jFrame.add(resetButton);
         jFrame.setVisible(true);
     }
